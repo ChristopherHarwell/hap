@@ -43,6 +43,7 @@ import { fetchNotifications } from './redux/notifications/notificationActions';
 
 import IdleTimer from './utils/general/idleTimer';
 import { Timer } from '@material-ui/icons';
+
 import { logOut } from './redux/users/userActions';
 
 const TRACKING_ID = 'G-ZDW3ENHWE7'; // YOUR_OWN_TRACKING_ID
@@ -62,8 +63,6 @@ ReactDOM.render(
 );
 
 function RAP() {
-  const [isTimeout, setIsTimeout] = useState(false);
-
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -83,23 +82,6 @@ function RAP() {
 
     notification.info({ message: options.message, btn });
   };
-
-  useEffect(() => {
-    const timer = new IdleTimer({
-      timeout: 10, // expire after 10 seconds
-      onTimeout: () => {
-        setIsTimeout(true);
-      },
-      onExpired: () => {
-        //do something if expired on load
-        setIsTimeout(true);
-      },
-    });
-
-    return () => {
-      timer.cleanUp();
-    };
-  }, []);
 
   useEffect(() => {
     socket.on('requestChange', options => {
@@ -162,3 +144,5 @@ function RAP() {
     </Layout>
   );
 }
+
+export default RAP;
