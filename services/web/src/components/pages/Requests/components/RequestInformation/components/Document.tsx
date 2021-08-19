@@ -20,6 +20,8 @@ import {
 
 import { axiosWithAuth } from '../../../../../../api/axiosWithAuth';
 
+import { axiosForPanda } from '../../../../../../api/axiosForPanda';
+
 import styles from '../../../../../../styles/pages/request.module.css';
 
 const { Paragraph } = Typography;
@@ -109,6 +111,18 @@ const Document = ({ document, setDocuments, setOriginalDocuments }) => {
     postDocChange,
   };
 
+  const pandaDownload = async () => {
+    try {
+      const doc = await axiosForPanda().get(
+        `/documents/${document.pandaId}/download`
+      );
+      console.log(doc);
+    } catch (error) {
+      console.log(error);
+      alert('Error downloading document');
+    }
+  };
+
   return (
     <div className={styles.document}>
       <Card
@@ -122,6 +136,7 @@ const Document = ({ document, setDocuments, setOriginalDocuments }) => {
         actions={[
           <DownloadOutlined onClick={handleDownload} />,
           <DeleteOutlined onClick={handleDelete} />,
+          <Button onClick={pandaDownload}>DL Test</Button>,
         ]}
       >
         <RenderName name={docState.name} {...props} />
