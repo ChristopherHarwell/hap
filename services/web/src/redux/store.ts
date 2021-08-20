@@ -9,7 +9,7 @@ import storage from 'redux-persist/lib/storage';
 
 import rootReducer from './rootReducer';
 
-const middlewares = [logger, thunk];
+const middlewares = [thunk];
 
 //Setting up redux-persist
 
