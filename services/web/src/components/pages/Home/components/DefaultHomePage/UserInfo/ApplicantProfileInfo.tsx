@@ -51,7 +51,7 @@ const ApplicantProfileInfo = ({
         <Form.Item
           label="Date Of Birth"
           name="dob"
-          initialValue={formatDate(applicantData.dob)}
+          initialValue={applicantData.dob}
         >
           <Input disabled={disabled} name="dob" />
         </Form.Item>

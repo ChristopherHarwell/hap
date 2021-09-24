@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Button } from 'antd';
 
-import { Form, Checkbox } from 'antd';
+import { Form, Checkbox, Input } from 'antd';
 
 import { axiosWithAuth } from '../../../../../api/axiosWithAuth';
 import { setCurrentUser } from '../../../../../redux/users/userActions';
@@ -13,6 +13,8 @@ export default function Submit({ setErrorMessage, request, dispatch }) {
   const history = useHistory();
 
   const [isCheckboxSelected, setIsCheckboxSelected] = useState(false);
+
+  const [isAdvocateSelected, setIsAdvocateSelected] = useState(false);
 
   return (
     <div
@@ -37,7 +39,11 @@ export default function Submit({ setErrorMessage, request, dispatch }) {
       >
         <br />
         <br />
-        <h3>
+        <br />
+        <br />
+        <br />
+
+        <h3 style={{}}>
           Thank you for completing all the steps and uploading your documents.
           Please review the final question below. Your request will not be able
           to be processed without granting us persmission to speak to other
@@ -57,13 +63,49 @@ export default function Submit({ setErrorMessage, request, dispatch }) {
           >
             <Checkbox
               name="advocate"
-              onChange={e => setIsCheckboxSelected(e.target.checked)}
+              onChange={e => setIsAdvocateSelected(e.target.checked)}
+            >
+              Check this box if you are an advocate completing this request on
+              behalf of another person
+            </Checkbox>
+          </Form.Item>
+
+          <Form.Item
+            label="Advocate Name"
+            name="advocateName"
+            initialValue={"Advocate's Name"}
+          >
+            <Input disabled={!isAdvocateSelected} name="advocateName" />
+          </Form.Item>
+
+          <Form.Item
+            label="Advocate Email"
+            name="email"
+            initialValue={'advocate@agency.org'}
+          >
+            <Input disabled={!isAdvocateSelected} name="email" />
+          </Form.Item>
+
+          <Form.Item
+            required
+            rules={[
+              {
+                required: true,
+                message:
+                  'We cannot process your request without permission to speak to third parties regarding your request.ß',
+              },
+            ]}
+          >
+            <Checkbox
+              name="advocate"
+              onChange={e => setIsAdvocateSelected(e.target.checked)}
             >
               By Checking this box you agree to allow Family Promise of Spokane
               to speak with your landlord and the city of Spokane to facilitate
               the processing of your request.
             </Checkbox>
           </Form.Item>
+
           <Button
             disabled={!isCheckboxSelected}
             size="large"

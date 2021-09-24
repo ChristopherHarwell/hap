@@ -1,6 +1,6 @@
 const faker = require('faker');
 
-const dob = new Date('2015-03-25');
+const dob = new Date('1981-02-13');
 
 export const INITIAL_VALUES_DEV = {
   firstName: faker.name.firstName(),

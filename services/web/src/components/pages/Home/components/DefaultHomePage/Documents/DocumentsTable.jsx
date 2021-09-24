@@ -7,7 +7,11 @@ import buildTableData from './utils/buildTableData';
 import UploadDocModal from './modals/UploadDocModal';
 import SelfDecModal from './modals/SelfDecModal';
 
-import { InfoCircleOutlined, MinusOutlined } from '@ant-design/icons';
+import {
+  InfoCircleOutlined,
+  MinusOutlined,
+  QuestionCircleOutlined,
+} from '@ant-design/icons';
 import { Tag, Table, Button, Typography } from 'antd';
 import checkIfAllDocumentsInCategoryAreDenied from './utils/checkIfAllDocumentsInCategoryAreDenied';
 
@@ -153,6 +157,8 @@ const DocumentsTable = ({ request }) => {
     updateLocalStatuses,
   };
 
+  const style = { position: '', color: '#1890FF' };
+
   return (
     <div className="documentsTable">
       <Table
@@ -170,9 +176,9 @@ const DocumentsTable = ({ request }) => {
                 style={{ color: '#1890FF' }}
               />
             ) : (
-              <InfoCircleOutlined
+              <QuestionCircleOutlined
                 onClick={e => onExpand(record, e)}
-                style={{ color: '#1890FF' }}
+                style={style}
               />
             ),
         }}

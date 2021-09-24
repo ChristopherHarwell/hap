@@ -34,6 +34,17 @@ export default function CreateAccount({
 
   const [loading, setLoading] = useState(false);
 
+  const dateFormat = 'MM/DD/YYYY';
+
+  const formatDateForDisplay = date => {
+    date = new Date(date);
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate() + 1;
+
+    return `${month}/${day}/${year}`;
+  };
+
   return (
     <Form
       layout="vertical"
@@ -60,8 +71,8 @@ export default function CreateAccount({
         <br />
         <p>
           {' '}
-          Once you create your account, please begin uploading supporting
-          documents as directed on your user dashboard.{' '}
+          Once you create your account, please begin entering all fields to
+          advance to the document upload section.{' '}
         </p>
         <p>
           <br />
@@ -112,14 +123,15 @@ export default function CreateAccount({
 
         <Form.Item
           name="dob"
-          label="Date of Birth (YYYY-MM-DD)"
+          label="Date of Birth (MM/DD/YYYY)"
           rules={[{ required: true, message: 'Date of Birth is required' }]}
         >
           <DatePicker
-            placeholder="1981-02-13"
+            name="dob"
+            placeholder={formatDateForDisplay(formValues.dob)}
             onChange={onDateChange}
-            value={formValues.dob}
-          ></DatePicker>
+            format={dateFormat}
+          />
         </Form.Item>
 
         <Form.Item

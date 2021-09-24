@@ -18,6 +18,15 @@ export default function Basic({ request, setRequest, column = 2 }) {
     return splitDate[0];
   };
 
+  const formatDateForDisplay = date => {
+    date = new Date(date);
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate() - 1;
+
+    return `${month}/${day}/${year}`;
+  };
+
   const [form] = Form.useForm();
 
   const resetFields = () => {
@@ -38,7 +47,7 @@ export default function Basic({ request, setRequest, column = 2 }) {
       firstName: values.firstName,
       lastName: values.lastName,
       dob: values.dob,
-      gender: values.gender
+      gender: values.gender,
     };
 
     try {
@@ -91,12 +100,11 @@ export default function Basic({ request, setRequest, column = 2 }) {
       <Form.Item
         label="DOB"
         name="dob"
-        initialValue={formatDate(request.dob)}
-        tooltip="YYYY / MM / DD"
+        initialValue={formatDateForDisplay(request.dob)}
+        tooltip="MM/DD/YYYY"
       >
         <Input disabled={disabled} />
       </Form.Item>
-
 
       <Form.Item
         hasFeedback
@@ -118,8 +126,6 @@ export default function Basic({ request, setRequest, column = 2 }) {
           ))}
         </Select>
       </Form.Item>
-
-
 
       <Form.Item label="Role" name="role" initialValue={request.role}>
         <Input disabled={true} />

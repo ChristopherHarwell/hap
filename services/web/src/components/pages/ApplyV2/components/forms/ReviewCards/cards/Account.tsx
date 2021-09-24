@@ -9,9 +9,10 @@ export default function Account({ formValues, step, setStep }) {
     <Card
       title="Account"
       extra={
-        <a href="#" onClick={() => setStep(step)}>
-          Edit
-        </a>
+        <h3>
+          Users cannot edit these account details, please ask an admin to edit
+          if you notice errors here.
+        </h3>
       }
     >
       <Descriptions column={1}>
